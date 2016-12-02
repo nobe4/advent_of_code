@@ -12,6 +12,6 @@
 |Lisp| | |
 |PHP| | |
 |JS| | |
-|Go| | |
+|Go| 2 | |
 |SQL| | |
 |Fish| | |
