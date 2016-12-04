@@ -8,7 +8,7 @@
 |Scala| 1 | |
 |Perl| | |
 |Bash| | |
-|Haskell| | |
+|Haskell| 4 | |
 |Lisp| | |
 |PHP| | |
 |JS| | |
