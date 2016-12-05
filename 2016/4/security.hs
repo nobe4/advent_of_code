@@ -6,7 +6,7 @@ import Data.Map (fromListWith, toList)
 -- Find the [ and start getting the hash
 -- Inspired by http://stackoverflow.com/a/21302529/2558252
 hash []       = []
--- Call hashIn when we found a ]
+-- Call hashIn when we find a [
 hash ('[':xs) = hashIn xs
 hash ( _ :xs) = hash xs
 

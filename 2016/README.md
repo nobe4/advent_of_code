@@ -4,7 +4,7 @@
 |---|---|---|
 |Python| | |
 |Ruby| | |
-|C| | |
+|C| 5 | |
 |Scala| 1 | |
 |Perl| | |
 |Bash| | |
