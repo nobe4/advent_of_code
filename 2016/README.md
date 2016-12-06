@@ -6,7 +6,7 @@
 |Ruby| | |
 |C| 5 | |
 |Scala| 1 | |
-|Perl| | |
+|Perl| 6 | |
 |Bash| | |
 |Haskell| 4 | |
 |Lisp| | |
