@@ -7,7 +7,7 @@
 |C| 5 | |
 |Scala| 1 | |
 |Perl| 6 | |
-|Bash| | |
+|Bash| 7 | |
 |Haskell| 4 | |
 |Lisp| | |
 |PHP| | |
