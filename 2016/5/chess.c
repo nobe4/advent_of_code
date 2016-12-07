@@ -1,66 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #if defined(__APPLE__)
 #  define COMMON_DIGEST_FOR_OPENSSL
 #  include <CommonCrypto/CommonDigest.h>
-#  define SHA1 CC_SHA1
 #else
 #  include <openssl/md5.h>
 #endif
 
 // Create a MD5 hash from a string
 // inspired from http://stackoverflow.com/a/8389763/2558252
-unsigned char* MD5(const char *str, int length) {
+void MD5(const char *str, int length, unsigned char *digest) {
   // MD5 context
   MD5_CTX context;
-
-  // Buffer for the md5 digest
-  unsigned char* digest = (unsigned char*)malloc(16);
 
   // Compute the MD5
   MD5_Init(&context);
   MD5_Update(&context, str, length);
-  MD5_Final(digest, &context);
 
-  return digest;
+  // Put the result in digest
+  MD5_Final(digest, &context);
 }
 
 // Create a string concatenating a base string with an integer
-char *generateString(int i){
+// apply MD5 over it
+void generate_MD5(int i, char* buffer, unsigned char *md5){
+
   // Base string, entry point of the challenge
   char base[] = "uqwqemis";
 
   // String containing a representation of i
-  char increment[128];
-
-  // Will contains the concatenation of the string and the int
-  char *buffer = (char*)malloc(256);
+  char increment[12];
 
   // Convert i into a char, in the increment string
   // May be a faulty operation, as we aren't checking for any boundary ¯\_(ツ)_/¯
   sprintf(increment, "%d", i);
 
   // Concatenate both strings into the buffer
-  snprintf(buffer, 256, "%s%s", base, increment);
+  snprintf(buffer, 32, "%s%s", base, increment);
 
-  return buffer;
+  MD5(buffer, strlen(buffer), md5);
 }
 
 int main(int argc, char **argv) {
   // Reference of increment
-  int increment = 0;
+  uint32_t increment = 0;
 
   // Valid MD5 used for the second password
-  int count = 0;
+  unsigned int count = 0;
 
   // Blank passwords
   // blank cells will be checked for non-existing char
   char password[] = "        ";
 
   // Counter to know when to stop searching for the first password
-  int first_password = 0;
+  unsigned int first_password = 0;
 
   // Position of the curren char, used to cast from hex, into int
   char *position_c = (char *)malloc(2);
@@ -72,8 +68,12 @@ int main(int argc, char **argv) {
   // String to MD5
   char* string;
 
-  // Result of the MD5
-  unsigned char* md5;
+  // Buffer for the concatenation of the base string and the increment
+  // Will contains the concatenation of the string and the int
+  char *buffer = (char*)malloc(32);
+
+  // Buffer for the md5 digest
+  unsigned char* md5 = (unsigned char *)malloc(16);
 
   // Disable output buffering
   setbuf(stdout, NULL);
@@ -84,8 +84,8 @@ int main(int argc, char **argv) {
 
   while (count < 8){
 
-    string = generateString(increment);
-    md5 = MD5(string, strlen(string));
+    // Generate the MD5 for the current increment
+    generate_MD5(increment, buffer, md5);
 
     // Check the first 2 chars are '0'
     if (md5[0] == 0 && md5[1] == 0) {
@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 
         }
 
-        // If the char starts with a '0' and must be less than the password last index
+        // If the char starts with a '0' and is less than the password last index
         if (md5[2] < 8) {
 
           // Cast the position of the next char from the 3rd hex char
@@ -129,13 +129,17 @@ int main(int argc, char **argv) {
 
     }
 
-    // Don't forget to free your memory
-    free(string);
     increment ++;
 
   }
 
   printf("\n-> %s \n", password);
+
+  // Don't forget to free your memory
+  free(buffer);
+  free(md5);
+  free(position_c);
+  free(password_buffer);
 
   return 0;
 }
