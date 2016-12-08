@@ -11,7 +11,7 @@
 |Haskell| 4 | |
 |Lisp| | |
 |PHP| | |
-|JS| | |
+|JS| 8 | |
 |Go| 2 | |
 |SQL| 3 | |
 |Fish| | |
