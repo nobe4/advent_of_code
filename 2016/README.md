@@ -3,7 +3,7 @@
 | Language | Day 1 | Day 2 |
 |---|---|---|
 |Python| | |
-|Ruby| | |
+|Ruby| 9 | |
 |C| 5 | |
 |Scala| 1 | |
 |Perl| 6 | |
