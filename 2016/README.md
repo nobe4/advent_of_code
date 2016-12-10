@@ -2,16 +2,16 @@
 
 | Language | Day 1 | Day 2 |
 |---|---|---|
+|Bash| 7 | |
+|C| 5 | |
+|Fish| | |
+|Go| 2 | |
+|Haskell| 4 | |
+|JS| 8 | |
+|Lisp| | |
+|PHP| 10 | |
+|Perl| 6 | |
 |Python| | |
 |Ruby| 9 | |
-|C| 5 | |
-|Scala| 1 | |
-|Perl| 6 | |
-|Bash| 7 | |
-|Haskell| 4 | |
-|Lisp| | |
-|PHP| | |
-|JS| 8 | |
-|Go| 2 | |
 |SQL| 3 | |
-|Fish| | |
+|Scala| 1 | |
